@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import AddNewCoverLetter from "./AddNewCoverLetter";
-import { LoaderCircle } from "lucide-react";
+import { File, LoaderCircle } from "lucide-react";
 import { coverLetterSchema } from "@/utils/schema";
 import CoverLetterItemCard from "./CoverLetterItemCard";
 import { usePathname } from "next/navigation";
@@ -45,10 +45,15 @@ function CoverLetterList() {
           <div className="mt-8 ml-20">
             <LoaderCircle className="animate-spin" size={48} />
           </div>
-        ) : (
+        ) : coverLetterList?.length > 0 ? (
           coverLetterList?.map((item, index) => (
             <CoverLetterItemCard key={index + 1} coverLetter={item} />
           ))
+        ) : (
+          <div className="flex items-center gap-1 ml-5 text-gray-500">
+            <File color="#6b7280" />
+            <span className="text-xs ">No item</span>
+          </div>
         )}
       </div>
     </div>

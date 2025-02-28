@@ -15,7 +15,7 @@ export const coverLetterSchema = pgTable("coverLetter", {
   id: serial("id").primaryKey(),
   coverLetterId: varchar("coverLetterId").notNull(),
   coverLetterResp: text("coverLetterResp").notNull(),
-  coverLetterTitle: varchar("coverLetterTitle"),
+  coverLetterTitle: varchar("coverLetterTitle").notNull(),
   createdBy: varchar("createdBy").notNull(),
   createdAt: varchar("createdAt").notNull(),
 });

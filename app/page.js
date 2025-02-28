@@ -35,7 +35,7 @@ export default function Home() {
         <h1 className="uppercase text-5xl md:text-6xl lg:text-7xl xl:text-8xl bg-gradient-to-b from-primary via-gray-500 to-gray-600 font-extrabold text-transparent bg-clip-text tracking-tighter">
           RELAX. You'll Get Hired Faster with Less effort
         </h1>
-        <p className="text-base text-gray-600 max-w-xl">
+        <p className="text-base text-gray-600">
           Boost your job search with Workzenn. AI-driven resume builder,
           interview prep, and career insights to land your dream job.{" "}
         </p>
@@ -72,7 +72,177 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mx-auto my-20 flex flex-col gap-10 py-20 items-center border border-r-0 border-l-0 border-primary">
+      <div className="space-y-4 mx-auto max-w-xl my-20">
+        <details
+          className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg"
+          open
+        >
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary ">
+            <h2 className="font-medium">What is Workzenn?</h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            Workzenn is an AI-powered job search assistant that helps you
+            prepare for interviews, create professional resumes, and craft
+            compelling cover letters to land your dream job.
+          </p>
+        </details>
+
+        <details className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg">
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900">
+            <h2 className="font-medium">
+              How does the interview simulator work?
+            </h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            Our AI-driven mock interview feature simulates real interview
+            scenarios by asking industry-specific questions and providing
+            feedback on your responses to help you improve.
+          </p>
+        </details>
+
+        <details className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg">
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900">
+            <h2 className="font-medium">
+              Can I generate a CV and cover letter?
+            </h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            Yes! Workzenn provides an AI-powered CV builder (coming soon) and
+            cover letter generator to help you create professional job
+            application documents effortlessly.
+          </p>
+        </details>
+
+        <details className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg">
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900">
+            <h2 className="font-medium">Can Workzenn help me get a job?</h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            While Workzenn doesn’t directly provide jobs, it equips you with the
+            right tools to increase your chances of getting hired by enhancing
+            your resume, interview skills, and job application process.
+          </p>
+        </details>
+
+        <details className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg">
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900">
+            <h2 className="font-medium">Is my data safe with Workzenn?</h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            Absolutely! We prioritize your privacy and security. Your data is
+            encrypted and never shared without your consent.
+          </p>
+        </details>
+
+        <details className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg">
+          <summary className="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900">
+            <h2 className="font-medium">Who can use Workzenn?</h2>
+
+            <svg
+              className="size-5 shrink-0 transition duration-300 group-open:-rotate-180"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </summary>
+
+          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+            Anyone looking for a job! Whether you're a fresh graduate, a career
+            switcher, or an experienced professional, Workzenn provides tools to
+            boost your job search.
+          </p>
+        </details>
+      </div>
+
+      <div className="mx-auto my-10 flex flex-col gap-10 py-20 items-center border border-r-0 border-l-0 border-primary">
         <h2 className="text-4xl font-bold text-primary">
           You too much thinking. Join us now!
         </h2>

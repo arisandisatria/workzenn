@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { chatSession } from "@/utils/aiModel";
+import { chatSession, coverLetterChatSession } from "@/utils/aiModel";
 import { LoaderCircle } from "lucide-react";
 import { db } from "@/utils/db";
 import { coverLetterSchema } from "@/utils/schema";
@@ -47,7 +47,7 @@ function AddNewCoverLetter() {
     try {
       setLoading(true);
 
-      const generatedQuestion = await chatSession.sendMessage(
+      const generatedQuestion = await coverLetterChatSession.sendMessage(
         COVER_LETTER_PROMPT(info)
       );
       const result = generatedQuestion.response.text();
@@ -59,6 +59,7 @@ function AddNewCoverLetter() {
           .values({
             coverLetterId: uuidv4(),
             coverLetterResp: result,
+            coverLetterTitle: info.jobPosition,
             createdBy: user?.primaryEmailAddress?.emailAddress,
             createdAt: moment().format("DD-MM-YYYY"),
           })
@@ -109,6 +110,7 @@ function AddNewCoverLetter() {
                 <label>Phone Number</label>
                 <Input
                   placeholder="ex. 0812345678"
+                  type="tel"
                   onChange={(event) =>
                     setInfo({
                       ...info,

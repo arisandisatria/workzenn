@@ -11,13 +11,15 @@ function CoverLetterItemCard({ coverLetter }) {
 
   return (
     <div className="border shadow-sm bg-white rounded-lg p-3 flex flex-col gap-1.5">
-      <h2 className="font-bold text-primary">Cover Letter</h2>
+      <h2 className="font-bold text-primary">
+        {coverLetter?.coverLetterTitle}
+      </h2>
       <p className="text-xs text-gray-400">
         Created At: {coverLetter?.createdAt}
       </p>
 
       <Button onClick={onStart} className="w-full">
-        Start
+        Check
       </Button>
     </div>
   );

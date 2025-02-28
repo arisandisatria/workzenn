@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import InterviewItemCard from "./InterviewItemCard";
 import { usePathname } from "next/navigation";
 import AddNewInterview from "./AddNewInterview";
-import { LoaderCircle } from "lucide-react";
+import { File, LoaderCircle } from "lucide-react";
 
 function InterviewList() {
   const { user, isLoaded } = useUser();
@@ -17,7 +17,7 @@ function InterviewList() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (isLoaded || user) getInterviewList();
+    if (isLoaded || pathname || user) getInterviewList();
   }, [pathname, user]);
 
   const getInterviewList = async () => {
@@ -48,10 +48,15 @@ function InterviewList() {
           <div className="mt-8 ml-20">
             <LoaderCircle className="animate-spin" size={48} />
           </div>
-        ) : (
+        ) : interviewList?.length > 0 ? (
           interviewList?.map((item, index) => (
             <InterviewItemCard key={index + 1} interview={item} />
           ))
+        ) : (
+          <div className="flex items-center gap-1 ml-5 text-gray-500">
+            <File color="#6b7280" />
+            <span className="text-xs ">No item</span>
+          </div>
         )}
       </div>
     </div>
