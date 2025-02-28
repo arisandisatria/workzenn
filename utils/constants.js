@@ -1,0 +1,58 @@
+import moment from "moment";
+
+export const PROMPT = (jobPosition, jobDesc, jobExp) => {
+  return `Job position: ${jobPosition}, 
+Job Description: ${jobDesc}, 
+Years of Experience: ${jobExp}. 
+
+Based on these details, generate exactly 8 interview questions with answers in **strict JSON format** as an array of objects. Each object must have:
+
+{
+  "question": "string",
+  "answer": "string"
+}
+
+Return only the JSON output without any extra explanation.`;
+};
+
+export const COVER_LETTER_PROMPT = (info) => {
+  return `
+    [My Name: ${info.name}]
+    [My Address: ${info.address}]
+    [My Email: ${info.email}]
+    [My Phone Number: ${info.phoneNumber}]
+    [Current Date: ${moment().format("DD-MM-YYYY")}]
+    [Job Position Applied: ${info.jobPosition}]
+    [Job Experience: ${info.jobExperience}]
+    [Job Information Source: ${info.jobInformationSource}]
+    [Receiver Name: ${info.receiverName}]
+    [Receiver Position: ${info.receiverPosition}]
+    [Company Name: ${info.companyName}]
+    [Company Address: ${info.companyAddress}]
+
+    - Structure format:
+      [My Name]
+      [My Address]
+      [My Email]
+      [My Phone Number]
+      [Current Date]
+
+      [Hiring Manager’s Name]
+      [Hiring Manager’s Position]
+      [Company Name]
+      [Company Address]
+
+      Subject: Application for [Job Title] Position
+
+      Dear [Hiring Manager’s Name / Hiring Team],
+
+      [cover letter content]
+
+      Sincerely,
+      [Your Name]
+
+    - Base on those information, generate a professional and formal cover letter.
+    - Please follow the structure format
+    - Return only the text output without any extra explanation.
+  `;
+};
