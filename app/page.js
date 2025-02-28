@@ -26,9 +26,14 @@ export default function Home() {
             <strong>Workzenn</strong>
           </h1>
         </Link>
-        <Link href={"/sign-up"}>
-          <Button>Get Started</Button>
-        </Link>
+        <div className="flex gap-5">
+          <Link href={"/sign-in"}>
+            <Button variant="outline">Sign In</Button>
+          </Link>
+          <Link href={"/sign-up"}>
+            <Button>Get Started</Button>
+          </Link>
+        </div>
       </nav>
 
       <div className="mx-auto text-center mt-24 flex items-center flex-col gap-5">
@@ -244,7 +249,7 @@ export default function Home() {
 
       <div className="mx-auto my-10 flex flex-col gap-10 py-20 items-center border border-r-0 border-l-0 border-primary">
         <h2 className="text-4xl font-bold text-primary">
-          You too much thinking. Join us now!
+          You think too much. Join us now!
         </h2>
         <Link href={"/sign-up"}>
           <Button className="animate-bounce w-fit">Start Here</Button>

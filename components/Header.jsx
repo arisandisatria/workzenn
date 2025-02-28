@@ -28,14 +28,14 @@ function Header() {
             path == "/upgrade" && "text-primary font-bold"
           }`}
         >
-          Upgrade
+          <Link href={"/upgrade"}>Upgrade</Link>
         </li>
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
-            path == "/how" && "text-primary font-bold"
+            path == "/about-us" && "text-primary font-bold"
           }`}
         >
-          About Us
+          <Link href={"/about-us"}>About Us</Link>
         </li>
       </ul>
       <UserButton />

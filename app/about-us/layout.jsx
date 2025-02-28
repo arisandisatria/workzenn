@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header";
 
-function DashboardLayout({ children }) {
+function AboutUsLayout({ children }) {
   return (
     <div className="max-w-7xl mx-auto">
       <Header />
@@ -10,4 +10,4 @@ function DashboardLayout({ children }) {
   );
 }
 
-export default DashboardLayout;
+export default AboutUsLayout;
