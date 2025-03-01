@@ -59,6 +59,7 @@ function StartInterview({ params }) {
             <QuestionSection
               mockInterviewQuestion={mockInterviewQuestion}
               activeQuestion={activeQuestion}
+              setActiveQuestion={setActiveQuestion}
             />
             <RecordAnswerSection
               mockInterviewQuestion={mockInterviewQuestion}

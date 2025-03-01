@@ -19,7 +19,7 @@ function CoverLetterItemCard({ coverLetter }) {
       </p>
 
       <Button onClick={onStart} className="w-full">
-        Check
+        Show
       </Button>
     </div>
   );

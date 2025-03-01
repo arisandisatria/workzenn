@@ -15,9 +15,10 @@ export default function Home() {
   useEffect(() => {
     if (user) {
       router.replace("/dashboard");
+    } else {
+      router.replace("/");
     }
   }, [user]);
-
   return (
     <main className="pb-10 max-w-7xl mx-auto">
       <nav className="flex py-6 justify-between items-center border border-b-gray-200 border-t-0 border-l-0 border-r-0 rounded-sm">

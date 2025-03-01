@@ -4,21 +4,17 @@ import { db } from "@/utils/db";
 import { coverLetterSchema } from "@/utils/schema";
 import { eq } from "drizzle-orm";
 import React, { use, useEffect, useState } from "react";
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/js/plugins/markdown.min.js";
-import FroalaEditor from "react-froala-wysiwyg";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 function CoverLetter({ params }) {
   const { coverLetterId } = use(params);
   const [coverLetterData, setCoverLetterData] = useState("");
   const [coverLetterTitle, setCoverLetterTitle] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     getCoverLetterDetails();
@@ -32,8 +28,6 @@ function CoverLetter({ params }) {
         .select()
         .from(coverLetterSchema)
         .where(eq(coverLetterSchema.coverLetterId, coverLetterId));
-
-      console.log(result[0]?.coverLetterResp);
 
       setCoverLetterTitle(result[0]?.coverLetterTitle);
       setCoverLetterData(result[0]?.coverLetterResp);
@@ -59,7 +53,23 @@ function CoverLetter({ params }) {
     }
   };
 
-  const formattedCoverLetter = coverLetterData?.replace(/\n/g, "<br>") || "";
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: coverLetterData,
+    immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none bg-white p-4 rounded-lg",
+      },
+    },
+  });
+
+  useEffect(() => {
+    if (editor && coverLetterData) {
+      editor.commands.setContent(coverLetterData);
+    }
+  }, [coverLetterData, editor]);
 
   return (
     <div className="my-10">
@@ -73,14 +83,7 @@ function CoverLetter({ params }) {
       ) : (
         coverLetterData !== "" && (
           <>
-            <FroalaEditor
-              model={formattedCoverLetter}
-              tag="textarea"
-              config={{
-                placeholderText: "Result will be here...",
-              }}
-              onModelChange={(e) => setCoverLetterData(e)}
-            />
+            <EditorContent editor={editor} />
             <div className="flex justify-end mt-5 gap-5">
               <Link href={"/dashboard"}>
                 <Button variant="outline">Go Home</Button>
