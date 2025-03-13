@@ -1,9 +1,28 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+// import {
+//   getAuthenticatedUser,
+//   lemonSqueezySetup,
+// } from "@lemonsqueezy/lemonsqueezy.js";
+
+// const apiKey = import.meta.env.NEXT_PUBLIC_LEMON_SQUEEZY_API_KEY;
+
+// lemonSqueezySetup({
+//   apiKey,
+//   onError: (error) => console.error("Error!", error),
+// });
+
+// const { data, error } = await getAuthenticatedUser();
+
+// if (error) {
+//   console.log(error.message);
+// } else {
+//   console.log(data);
+// }
 
 function Upgrade() {
   return (
-    <div className="mx-auto max-w-3xl mt-20 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div className="mx-auto max-w-3xl my-6 md:my-20 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
         <div className="rounded-2xl border border-primary p-6 ring-1 shadow-xs ring-primary sm:order-last sm:px-8 lg:p-12">
           <div className="text-center">
@@ -99,7 +118,25 @@ function Upgrade() {
                 />
               </svg>
 
-              <span className="text-gray-700"> Help center access </span>
+              <span className="text-gray-700"> Help Center Access </span>
+            </li>
+            <li className="flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-5 text-primary"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4.5 12.75l6 6 9-13.5"
+                />
+              </svg>
+
+              <span className="text-gray-700"> Customize Resume Layout </span>
             </li>
           </ul>
 
@@ -195,7 +232,7 @@ function Upgrade() {
                 />
               </svg>
 
-              <span className="text-gray-700"> Help center access </span>
+              <span className="text-gray-700"> Help Center Access </span>
             </li>
           </ul>
 

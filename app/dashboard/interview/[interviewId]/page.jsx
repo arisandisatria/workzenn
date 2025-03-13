@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { mockInterviewSchema } from "@/utils/schema";
 import { eq } from "drizzle-orm";
-import { Lightbulb, WebcamIcon } from "lucide-react";
+import { Lightbulb, Mic, WebcamIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, use, useState } from "react";
 import Webcam from "react-webcam";
@@ -13,9 +13,14 @@ function Interview({ params }) {
   const { interviewId } = use(params);
   const [interviewData, setInterviewData] = useState();
   const [webCamEnabled, setWebCamEnabled] = useState(false);
+  const [userMedia, setUserMedia] = useState({
+    webcam: false,
+    microphone: false,
+  });
 
   useEffect(() => {
     getInterviewDetails();
+    checkMediaAvailability();
   }, [interviewId]);
 
   const getInterviewDetails = async () => {
@@ -27,24 +32,29 @@ function Interview({ params }) {
     setInterviewData(result[0]);
   };
 
+  const checkMediaAvailability = async () => {
+    try {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const hasWebcam = devices.some((device) => device.kind === "videoinput");
+      const hasMicrophone = devices.some(
+        (device) => device.kind === "audioinput"
+      );
+
+      setUserMedia({ webcam: hasWebcam, microphone: hasMicrophone });
+    } catch (error) {
+      console.error("Error checking media devices:", error);
+      setUserMedia({ webcam: false, microphone: false });
+    }
+  };
+
   return (
     <div className="my-10">
-      <h2 className="font-bold text-2xl">Let's Get Started</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="flex flex-col my-5 gap-5">
+      <div className="flex flex-col">
+        <div className="flex flex-col-reverse my-5 gap-5">
           <div className="flex flex-col p-5 rounded-lg border gap-5">
-            <h2 className="text-lg">
-              <strong>Job Role/Position: </strong>
-              {interviewData?.jobPosition}
-            </h2>
-            <h2 className="text-lg">
-              <strong>Job Description: </strong>
-              {interviewData?.jobDesc}
-            </h2>
-            <h2 className="text-lg">
-              <strong>Years of Experience: </strong>
-              {interviewData?.jobExp} years
-            </h2>
+            <h2 className="font-bold text-2xl">{interviewData?.jobPosition}</h2>
+            <p>{interviewData?.jobDesc}</p>
+            <p className="text-sm text-gray-400">{interviewData?.createdAt}</p>
           </div>
           <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">
             <h2 className="flex gap-2 items-center text-yellow-600">
@@ -63,7 +73,7 @@ function Interview({ params }) {
             </h2>
           </div>
         </div>
-        <div className="my-5">
+        <div className="my-5 text-center">
           {webCamEnabled ? (
             <Webcam
               style={{ height: 370, width: "100%" }}
@@ -72,19 +82,34 @@ function Interview({ params }) {
               mirrored={true}
             />
           ) : (
-            <WebcamIcon className="h-[370px] w-full p-20 bg-secondary rounded-lg border" />
+            <WebcamIcon className="h-[370px] w-fit mx-auto p-20 rounded-lg bg-gray-200" />
           )}
-          <Button
-            variant="ghost"
-            className="w-full mt-5 hover:border"
-            onClick={() => setWebCamEnabled(!webCamEnabled)}
-          >
-            Enable Web Cam and Microphone
-          </Button>
+          <div className="flex flex-col justify-center items-center mt-5 gap-5">
+            <div className="flex gap-2">
+              <WebcamIcon
+                className={`${
+                  userMedia.webcam == false ? "text-gray-400" : "text-green-500"
+                }`}
+              />
+              <Mic
+                className={`${
+                  userMedia.microphone == false
+                    ? "text-gray-400"
+                    : "text-green-500"
+                }`}
+              />
+            </div>
+            <Button
+              className="w-fit hover:border"
+              onClick={() => setWebCamEnabled(!webCamEnabled)}
+            >
+              {!webCamEnabled ? "Enable" : "Disable"} Web Cam and Microphone
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className="flex justify-end items-end gap-5">
+      <div className="flex justify-center items-center gap-5 mt-10">
         <Link href={`/dashboard`}>
           <Button variant="outline">Cancel</Button>
         </Link>

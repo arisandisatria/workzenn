@@ -51,6 +51,9 @@ export const COVER_LETTER_PROMPT = (info) => {
       Sincerely,
       [Your Name]
 
+    - First paragraph, clearly explain why you are writing, stating the position or type of job you are applying for. Start by stating the position you are applying for and how you learned about the opening. Use a concise statement that includes three reasons why you feel you are a good fit for the opportunity.
+    - Second paragraph, explain why you are interested in the company and the job. Focus on skills or abilities that are relevant to the job.
+    - Third paragraph, summarize all the important information about your suitability for the position in the closing paragraph. Reiterate your interest in joining the company and show your desire to proceed to the interview stage. Don't forget to express your gratitude to the recruiter for considering your application.
     - Base on those information, generate a professional and formal cover letter.
     - Please follow the structure format
     - Return only the text output without any extra explanation.

@@ -9,12 +9,24 @@ import Link from "next/link";
 import { LoaderCircle } from "lucide-react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 function CoverLetter({ params }) {
   const { coverLetterId } = use(params);
   const [coverLetterData, setCoverLetterData] = useState("");
   const [coverLetterTitle, setCoverLetterTitle] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     getCoverLetterDetails();
@@ -38,6 +50,21 @@ function CoverLetter({ params }) {
     }
   };
 
+  const deleteCoverLetter = async () => {
+    setLoading(true);
+    try {
+      await db
+        .delete(coverLetterSchema)
+        .where(eq(coverLetterSchema.coverLetterId, coverLetterId));
+
+      router.replace("/dashboard");
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const updateCoverLetter = async () => {
     setLoading(true);
 
@@ -53,9 +80,13 @@ function CoverLetter({ params }) {
     }
   };
 
+  const formattedContent = coverLetterData
+    .replace(/ /g, "&nbsp;")
+    .replace(/\n/g, "<br>");
+
   const editor = useEditor({
     extensions: [StarterKit],
-    content: coverLetterData,
+    content: formattedContent,
     immediatelyRender: false,
     editorProps: {
       attributes: {
@@ -67,7 +98,7 @@ function CoverLetter({ params }) {
 
   useEffect(() => {
     if (editor && coverLetterData) {
-      editor.commands.setContent(coverLetterData);
+      editor.commands.setContent(formattedContent);
     }
   }, [coverLetterData, editor]);
 
@@ -84,14 +115,58 @@ function CoverLetter({ params }) {
         coverLetterData !== "" && (
           <>
             <EditorContent editor={editor} />
-            <div className="flex justify-end mt-5 gap-5">
-              <Link href={"/dashboard"}>
-                <Button variant="outline">Go Home</Button>
-              </Link>
-              <Button onClick={() => updateCoverLetter()}>
-                Save Cover Letter
+            <div className="mt-5 flex justify-between">
+              <Button variant="destructive" onClick={() => setOpenDialog(true)}>
+                Delete
               </Button>
+              <div className="flex gap-5">
+                <Link href={"/dashboard"}>
+                  <Button variant="outline">Go Home</Button>
+                </Link>
+                <Button onClick={() => updateCoverLetter()}>
+                  Save Cover Letter
+                </Button>
+              </div>
             </div>
+
+            <Dialog open={openDialog}>
+              <DialogContent className="max-w-xl">
+                <DialogHeader>
+                  <DialogTitle className="font-bold text-2xl">
+                    Are you sure?
+                  </DialogTitle>
+                  <DialogDescription>
+                    You're about to delete this cover letter. Remember, once you
+                    delete. No way to recover
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <div className="flex gap-5 justify-end">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      onClick={() => setOpenDialog(false)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={() => deleteCoverLetter()}
+                      variant="destructive"
+                      disabled={loading}
+                    >
+                      {loading ? (
+                        <>
+                          <LoaderCircle className="animate-spin" />
+                          Deleting...
+                        </>
+                      ) : (
+                        "Yes, I'm sure"
+                      )}
+                    </Button>
+                  </div>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </>
         )
       )}

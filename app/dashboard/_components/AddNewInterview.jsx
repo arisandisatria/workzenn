@@ -102,6 +102,7 @@ function AddNewInterview() {
             <div className="mt-2 flex flex-col gap-1.5">
               <label>Job description</label>
               <Textarea
+                className="resize-none"
                 placeholder="ex. Optimizing user interface"
                 required
                 onChange={(event) =>

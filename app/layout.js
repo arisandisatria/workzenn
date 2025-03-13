@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${nunitoSans.variable} ${nunito.variable} bg-secondary mx-auto antialiased`}
+          className={`${nunitoSans.variable} ${nunito.variable} scrollbar bg-secondary px-auto antialiased`}
         >
           <Toaster />
           {children}

@@ -11,7 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { chatSession, coverLetterChatSession } from "@/utils/aiModel";
+import { coverLetterChatSession } from "@/utils/aiModel";
 import { LoaderCircle } from "lucide-react";
 import { db } from "@/utils/db";
 import { coverLetterSchema } from "@/utils/schema";
@@ -94,7 +94,7 @@ function AddNewCoverLetter() {
           <form onSubmit={onSubmit}>
             <div className="flex gap-5 mb-2">
               <div className="flex flex-col gap-1.5">
-                <label>Your Name*</label>
+                <label className="text-sm md:text-base">Your Name*</label>
                 <Input
                   placeholder="ex. John Doe"
                   required
@@ -107,7 +107,7 @@ function AddNewCoverLetter() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label>Phone Number</label>
+                <label className="text-sm md:text-base">Phone Number</label>
                 <Input
                   placeholder="ex. 0812345678"
                   type="tel"
@@ -120,7 +120,7 @@ function AddNewCoverLetter() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label>Email</label>
+                <label className="text-sm md:text-base">Email</label>
                 <Input
                   type="email"
                   placeholder="ex. example@gmail.com"
@@ -134,7 +134,7 @@ function AddNewCoverLetter() {
               </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <label>Your Address</label>
+              <label className="text-sm md:text-base">Your Address</label>
               <Input
                 placeholder="ex. Sesame Street"
                 onChange={(event) =>
@@ -146,7 +146,7 @@ function AddNewCoverLetter() {
               />
             </div>
             <div className="mt-2 flex flex-col gap-1.5">
-              <label>Job Position*</label>
+              <label className="text-sm md:text-base">Job Position*</label>
               <Input
                 placeholder="ex. Frontend Developer"
                 required
@@ -158,9 +158,9 @@ function AddNewCoverLetter() {
                 }
               />
             </div>
-            <div className="flex gap-5">
+            <div className="flex gap-2 md:gap-5">
               <div className="mt-2 flex flex-col gap-1.5">
-                <label>Receiver Name*</label>
+                <label className="text-sm md:text-base">Receiver Name*</label>
                 <Input
                   placeholder="ex. Mr. Andrew Smith"
                   required
@@ -173,7 +173,9 @@ function AddNewCoverLetter() {
                 />
               </div>
               <div className="mt-2 flex flex-col gap-1.5">
-                <label>Receiver Position*</label>
+                <label className="text-sm md:text-base">
+                  Receiver Position*
+                </label>
                 <Input
                   placeholder="ex. Recruitment Team"
                   required
@@ -186,7 +188,7 @@ function AddNewCoverLetter() {
                 />
               </div>
               <div className="mt-2 flex flex-col gap-1.5">
-                <label>Company Name*</label>
+                <label className="text-sm md:text-base">Company Name*</label>
                 <Input
                   placeholder="ex. Meta, Google, Alibaba"
                   required
@@ -199,7 +201,7 @@ function AddNewCoverLetter() {
                 />
               </div>
               <div className="mt-2 flex flex-col gap-1.5">
-                <label>Job Info Source*</label>
+                <label className="text-sm md:text-base">Job Info Source*</label>
                 <Input
                   placeholder="ex. Linkedin"
                   required
@@ -214,7 +216,7 @@ function AddNewCoverLetter() {
             </div>
 
             <div className="mt-2 flex flex-col gap-1.5">
-              <label>Company Address*</label>
+              <label className="text-sm md:text-base">Company Address*</label>
               <Input
                 placeholder="ex. Wall Street"
                 required
@@ -228,8 +230,9 @@ function AddNewCoverLetter() {
             </div>
 
             <div className="mt-2 flex flex-col gap-1.5">
-              <label>Your Experience*</label>
+              <label className="text-sm md:text-base">Your Experience*</label>
               <Textarea
+                className="resize-none"
                 placeholder="ex. I have been a frontend developer for about 3 years. I've manage to develop a website and increasing the team work effeciency for about 20% and I always love to work as a team."
                 required
                 onChange={(event) =>
@@ -252,10 +255,10 @@ function AddNewCoverLetter() {
                 {loading ? (
                   <>
                     <LoaderCircle className="animate-spin" />
-                    Generating...
+                    Creating...
                   </>
                 ) : (
-                  "Add Cover Letter"
+                  "Create Cover Letter"
                 )}
               </Button>
             </div>

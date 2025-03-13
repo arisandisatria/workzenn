@@ -1,15 +1,21 @@
 "use client";
 
 import { UserButton } from "@clerk/nextjs";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-function Header() {
+function Header({ toggleSideNav }) {
   const path = usePathname();
 
   return (
-    <nav className="flex py-4 px-5 md:px-20 lg:px-36 justify-between items-center bg-secondary shadow-sm">
+    <nav className="flex py-4 px-5 md:px-20 lg:px-36 justify-between items-center shadow-sm">
+      <Menu
+        onClick={toggleSideNav}
+        size={35}
+        className="sm:hidden cursor-pointer"
+      />
       <Link href={"/"}>
         <h1 className="font-extrabold text-4xl text-primary">
           <strong>Workzenn</strong>
@@ -25,17 +31,17 @@ function Header() {
         </li>
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
-            path == "/upgrade" && "text-primary font-bold"
+            path == "/dashboard/upgrade" && "text-primary font-bold"
           }`}
         >
-          <Link href={"/upgrade"}>Upgrade</Link>
+          <Link href={"#"}>Upgrade</Link>
         </li>
         <li
           className={`hover:text-primary hover:font-bold transition-all cursor-pointer ${
-            path == "/about-us" && "text-primary font-bold"
+            path == "/dashboard/about-us" && "text-primary font-bold"
           }`}
         >
-          <Link href={"/about-us"}>About Us</Link>
+          <Link href={"/dashboard/about-us"}>About Us</Link>
         </li>
       </ul>
       <UserButton />

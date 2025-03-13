@@ -20,14 +20,14 @@ export default function Home() {
     }
   }, [user]);
   return (
-    <main className="pb-10 max-w-7xl mx-auto">
-      <nav className="flex py-6 justify-between items-center border border-b-gray-200 border-t-0 border-l-0 border-r-0 rounded-sm">
+    <main className="pb-10 mx-auto px-2 max-w-lg md:max-w-7xl">
+      <nav className="flex py-6 justify-center md:justify-between items-center border border-b-gray-200 border-t-0 border-l-0 border-r-0 rounded-sm">
         <Link href={"/"}>
           <h1 className="font-extrabold text-4xl text-primary">
             <strong>Workzenn</strong>
           </h1>
         </Link>
-        <div className="flex gap-5">
+        <div className="hidden md:flex gap-5">
           <Link href={"/sign-in"}>
             <Button variant="outline">Sign In</Button>
           </Link>
@@ -37,11 +37,11 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="mx-auto text-center mt-24 flex items-center flex-col gap-5">
+      <div className="mx-auto text-center mt-10 md:mt-24 flex items-center flex-col gap-5">
         <h1 className="uppercase text-5xl md:text-6xl lg:text-7xl xl:text-8xl bg-gradient-to-b from-primary via-gray-500 to-gray-600 font-extrabold text-transparent bg-clip-text tracking-tighter">
           RELAX. You'll Get Hired Faster with Less effort
         </h1>
-        <p className="text-base text-gray-600">
+        <p className="text-xs md:text-base text-gray-600">
           Boost your job search with Workzenn. AI-driven resume builder,
           interview prep, and career insights to land your dream job.{" "}
         </p>
@@ -55,30 +55,34 @@ export default function Home() {
         width={900}
         height={600}
         alt="hero banner"
-        className="mx-auto my-20 rounded-lg shadow-xl"
+        className="mx-auto my-10 md:my-20 rounded-lg shadow-xl w-[350px] h-[220px] md:w-[900px] md:h-[600px]"
       />
 
-      <div className="flex gap-10 justify-evenly text-center">
-        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-5 rounded-lg w-[60%] flex flex-col gap-2">
+      <div className="flex gap-2 md:gap-10 max-w-lg md:max-w-3xl mx-auto justify-around md:justify-evenly text-center">
+        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-3 md:p-5 rounded-lg w-[50%] md:w-[60%] flex flex-col gap-2">
           <Bot className="mx-auto" />
-          <h3 className="font-bold text-lg">Interview Simulation</h3>
-          <p className="text-xs">Train your interview with AI</p>
+          <h3 className="font-bold text-base md:text-lg">
+            Interview Simulation
+          </h3>
+          <p className="hidden md:block text-xs">
+            Train your interview with AI
+          </p>
         </div>
-        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-5 rounded-lg w-[60%] flex flex-col gap-2">
+        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-3 md:p-5 rounded-lg w-[50%] md:w-[60%] flex flex-col gap-2">
           <Scroll className="mx-auto" />
-          <h3 className="font-bold text-lg">Cover Letter Maker</h3>
-          <p className="text-xs">
+          <h3 className="font-bold text-base md:text-lg">Cover Letter Maker</h3>
+          <p className="hidden md:block text-xs">
             Make a very attractive cover letter with AI help
           </p>
         </div>
-        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-5 rounded-lg w-[60%] flex flex-col gap-2">
+        <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-3 md:p-5 rounded-lg w-[50%] md:w-[60%] flex flex-col gap-2">
           <Newspaper className="mx-auto" />
-          <h3 className="font-bold text-lg">Resume Builder</h3>
-          <p className="text-xs">Make a resume easily</p>
+          <h3 className="font-bold text-base md:text-lg">Resume Builder</h3>
+          <p className="hidden md:block text-xs">Make a resume easily</p>
         </div>
       </div>
 
-      <div className="space-y-4 mx-auto max-w-xl my-20">
+      <div className="space-y-4 mx-auto max-w-2xl my-20">
         <details
           className="group [&_summary::-webkit-details-marker]:hidden border border-primary rounded-lg"
           open
@@ -102,7 +106,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             Workzenn is an AI-powered job search assistant that helps you
             prepare for interviews, create professional resumes, and craft
             compelling cover letters to land your dream job.
@@ -131,7 +135,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             Our AI-driven mock interview feature simulates real interview
             scenarios by asking industry-specific questions and providing
             feedback on your responses to help you improve.
@@ -160,7 +164,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             Yes! Workzenn provides an AI-powered CV builder (coming soon) and
             cover letter generator to help you create professional job
             application documents effortlessly.
@@ -187,7 +191,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             While Workzenn doesn’t directly provide jobs, it equips you with the
             right tools to increase your chances of getting hired by enhancing
             your resume, interview skills, and job application process.
@@ -214,7 +218,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             Absolutely! We prioritize your privacy and security. Your data is
             encrypted and never shared without your consent.
           </p>
@@ -240,7 +244,7 @@ export default function Home() {
             </svg>
           </summary>
 
-          <p className="mt-4 px-4 pb-4 leading-relaxed text-gray-700">
+          <p className="px-4 pb-4 leading-relaxed text-gray-700">
             Anyone looking for a job! Whether you're a fresh graduate, a career
             switcher, or an experienced professional, Workzenn provides tools to
             boost your job search.
@@ -248,12 +252,12 @@ export default function Home() {
         </details>
       </div>
 
-      <div className="mx-auto my-10 flex flex-col gap-10 py-20 items-center border border-r-0 border-l-0 border-primary">
-        <h2 className="text-4xl font-bold text-primary">
+      <div className="mx-auto my-10 flex flex-col gap-10 py-10 md:py-20 items-center border border-r-0 border-l-0 border-primary">
+        <h2 className="text-center text-4xl font-bold text-primary">
           You think too much. Join us now!
         </h2>
         <Link href={"/sign-up"}>
-          <Button className="animate-bounce w-fit">Start Here</Button>
+          <Button className="animate-bounce w-fit">Get Started</Button>
         </Link>
       </div>
 
