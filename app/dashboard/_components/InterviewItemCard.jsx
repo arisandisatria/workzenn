@@ -20,13 +20,8 @@ function InterviewItemCard({ interview }) {
         Created At: {interview?.createdAt}
       </h2>
 
-      <div className="flex justify-between gap-1.5 md:gap-5">
-        <Button
-          size="sm"
-          variant="ghost"
-          className="w-full"
-          onClick={onFeedback}
-        >
+      <div className="flex justify-between gap-1.5 md:gap-2">
+        <Button variant="outline" className="w-full" onClick={onFeedback}>
           Feedback
         </Button>
         <Button onClick={onStart} className="w-full">

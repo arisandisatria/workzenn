@@ -4,24 +4,45 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { mockInterviewSchema } from "@/utils/schema";
 import { eq } from "drizzle-orm";
-import { Lightbulb, Mic, WebcamIcon } from "lucide-react";
+import { AudioLines, Lightbulb, Mic, WebcamIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, use, useState } from "react";
 import Webcam from "react-webcam";
+import useSpeechToText from "react-hook-speech-to-text";
 
 function Interview({ params }) {
   const { interviewId } = use(params);
   const [interviewData, setInterviewData] = useState();
   const [webCamEnabled, setWebCamEnabled] = useState(false);
+  const [isTalking, setIsTalking] = useState(false);
   const [userMedia, setUserMedia] = useState({
     webcam: false,
     microphone: false,
+  });
+  const {
+    error,
+    interimResult,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+    setResults,
+  } = useSpeechToText({
+    continuous: true,
+    useLegacyResults: false,
   });
 
   useEffect(() => {
     getInterviewDetails();
     checkMediaAvailability();
-  }, [interviewId]);
+  }, []);
+
+  useEffect(() => {
+    if (interimResult) {
+      setIsTalking(true);
+      setTimeout(() => setIsTalking(false), 100);
+    }
+  }, [interimResult]);
 
   const getInterviewDetails = async () => {
     const result = await db
@@ -40,9 +61,24 @@ function Interview({ params }) {
         (device) => device.kind === "audioinput"
       );
 
-      setUserMedia({ webcam: hasWebcam, microphone: hasMicrophone });
+      const cameraPermission = await navigator.permissions.query({
+        name: "camera",
+      });
+      const microphonePermission = await navigator.permissions.query({
+        name: "microphone",
+      });
+
+      const cameraAllowed = cameraPermission.state === "granted";
+      const microphoneAllowed = microphonePermission.state === "granted";
+
+      setUserMedia({
+        webcam: hasWebcam && cameraAllowed,
+        microphone: hasMicrophone && microphoneAllowed,
+      });
+
+      cameraPermission.onchange = () => checkMediaAvailability();
+      microphonePermission.onchange = () => checkMediaAvailability();
     } catch (error) {
-      console.error("Error checking media devices:", error);
       setUserMedia({ webcam: false, microphone: false });
     }
   };
@@ -73,7 +109,7 @@ function Interview({ params }) {
             </h2>
           </div>
         </div>
-        <div className="my-5 text-center">
+        <div className="text-center">
           {webCamEnabled ? (
             <Webcam
               style={{ height: 370, width: "100%" }}
@@ -91,30 +127,39 @@ function Interview({ params }) {
                   userMedia.webcam == false ? "text-gray-400" : "text-green-500"
                 }`}
               />
-              <Mic
-                className={`${
-                  userMedia.microphone == false
-                    ? "text-gray-400"
-                    : "text-green-500"
-                }`}
-              />
+              <div className="flex gap-1.5 relative">
+                <Mic
+                  className={`${
+                    userMedia.microphone == false
+                      ? "text-gray-400"
+                      : "text-green-500"
+                  }`}
+                />
+                {isTalking && <AudioLines className="absolute -right-6" />}
+              </div>
             </div>
             <Button
+              variant="outline"
               className="w-fit hover:border"
               onClick={() => setWebCamEnabled(!webCamEnabled)}
             >
-              {!webCamEnabled ? "Enable" : "Disable"} Web Cam and Microphone
+              {!webCamEnabled ? "Enable" : "Disable"} Web Cam
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-5 mt-10">
-        <Link href={`/dashboard`}>
-          <Button variant="outline">Cancel</Button>
+      <div className="flex flex-col-reverse justify-center items-center gap-3 mt-10">
+        <Link href={`/dashboard`} className="w-full text-center">
+          <Button variant="outline" className="w-[80%] mx-auto">
+            Cancel
+          </Button>
         </Link>
-        <Link href={`/dashboard/interview/${interviewId}/start`}>
-          <Button>Start Interview</Button>
+        <Link
+          href={`/dashboard/interview/${interviewId}/start`}
+          className="w-full text-center"
+        >
+          <Button className="w-[80%] mx-auto">Start Interview</Button>
         </Link>
       </div>
     </div>

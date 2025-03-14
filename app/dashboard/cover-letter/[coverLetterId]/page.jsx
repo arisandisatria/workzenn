@@ -17,20 +17,43 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 function CoverLetter({ params }) {
   const { coverLetterId } = use(params);
   const [coverLetterData, setCoverLetterData] = useState("");
   const [coverLetterTitle, setCoverLetterTitle] = useState("");
+  const [coverLetterCreatedAt, setCoverLetterCreatedAt] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
+
+  const formattedContent = coverLetterData
+    .replace(/ /g, "&nbsp;")
+    .replace(/\n/g, "<br>");
+
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: formattedContent,
+    immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        class:
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none bg-white p-4 rounded-lg",
+      },
+    },
+  });
 
   useEffect(() => {
     getCoverLetterDetails();
   }, [coverLetterId]);
+
+  useEffect(() => {
+    if (editor && coverLetterData) {
+      editor.commands.setContent(formattedContent);
+    }
+  }, [coverLetterData, editor]);
 
   const getCoverLetterDetails = async () => {
     setLoading(true);
@@ -41,10 +64,35 @@ function CoverLetter({ params }) {
         .from(coverLetterSchema)
         .where(eq(coverLetterSchema.coverLetterId, coverLetterId));
 
+      setCoverLetterCreatedAt(result[0]?.createdAt);
       setCoverLetterTitle(result[0]?.coverLetterTitle);
-      setCoverLetterData(result[0]?.coverLetterResp);
+      setCoverLetterData(result[0]?.coverLetterResp || "");
     } catch (error) {
       console.error("Error fetching cover letter data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateCoverLetter = async () => {
+    setLoading(true);
+    const updatedContent = editor?.getHTML();
+    try {
+      await db
+        .update(coverLetterSchema)
+        .set({ coverLetterResp: updatedContent })
+        .where(eq(coverLetterSchema.coverLetterId, coverLetterId));
+
+      setCoverLetterData(updatedContent);
+
+      toast.success("Cover letter changes saved succesfully", {
+        style: {
+          background: "green",
+          color: "white",
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
     } finally {
       setLoading(false);
     }
@@ -65,48 +113,8 @@ function CoverLetter({ params }) {
     }
   };
 
-  const updateCoverLetter = async () => {
-    setLoading(true);
-
-    try {
-      await db
-        .update(coverLetterSchema)
-        .set({ coverLetterResp: coverLetterData })
-        .where(eq(coverLetterSchema.coverLetterId, coverLetterId));
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const formattedContent = coverLetterData
-    .replace(/ /g, "&nbsp;")
-    .replace(/\n/g, "<br>");
-
-  const editor = useEditor({
-    extensions: [StarterKit],
-    content: formattedContent,
-    immediatelyRender: false,
-    editorProps: {
-      attributes: {
-        class:
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none bg-white p-4 rounded-lg",
-      },
-    },
-  });
-
-  useEffect(() => {
-    if (editor && coverLetterData) {
-      editor.commands.setContent(formattedContent);
-    }
-  }, [coverLetterData, editor]);
-
   return (
     <div className="my-10">
-      <h2 className="font-bold text-2xl mb-4">
-        {coverLetterTitle} Cover Letter
-      </h2>
       {loading ? (
         <div className="flex justify-center items-center w-full col-span-4 mt-20">
           <LoaderCircle className="animate-spin" size={48} />
@@ -114,6 +122,14 @@ function CoverLetter({ params }) {
       ) : (
         coverLetterData !== "" && (
           <>
+            <div className="flex justify-between items-center">
+              <h2 className="font-bold text-2xl mb-4">
+                {coverLetterTitle} Cover Letter
+              </h2>
+              <p className="text-gray-400">
+                Created At: {coverLetterCreatedAt}
+              </p>
+            </div>
             <EditorContent editor={editor} />
             <div className="mt-5 flex justify-between">
               <Button variant="destructive" onClick={() => setOpenDialog(true)}>
@@ -121,10 +137,10 @@ function CoverLetter({ params }) {
               </Button>
               <div className="flex gap-5">
                 <Link href={"/dashboard"}>
-                  <Button variant="outline">Go Home</Button>
+                  <Button variant="outline">Back</Button>
                 </Link>
                 <Button onClick={() => updateCoverLetter()}>
-                  Save Cover Letter
+                  Save Changes
                 </Button>
               </div>
             </div>
@@ -137,7 +153,7 @@ function CoverLetter({ params }) {
                   </DialogTitle>
                   <DialogDescription>
                     You're about to delete this cover letter. Remember, once you
-                    delete. No way to recover
+                    delete. No way to recover.
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>

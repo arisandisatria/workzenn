@@ -17,8 +17,8 @@ function QuestionSection({
   };
 
   return (
-    <div className="p-5 rounded-lg my-10">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+    <div className="p-5 rounded-lg">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
         {mockInterviewQuestion?.map((question, index) => (
           <p
             onClick={() => setActiveQuestion(index)}
@@ -33,26 +33,16 @@ function QuestionSection({
           </p>
         ))}
       </div>
-      <h2 className="my-5 text-md md:text-lg text-justify">
-        {mockInterviewQuestion[activeQuestion]?.question}
-      </h2>
-      <Volume2
-        className="cursor-pointer"
-        onClick={() =>
-          textToSpeech(mockInterviewQuestion[activeQuestion]?.question)
-        }
-      />
-
-      <div className="border rounded-lg p-5 bg-blue-100 mt-20">
-        <h2 className="flex gap-2 items-center text-primary">
-          <Lightbulb />
-          <strong>Note: </strong>
+      <div className="md:mt-10">
+        <h2 className="my-5 text-md md:text-lg text-justify">
+          {mockInterviewQuestion[activeQuestion]?.question}
         </h2>
-        <h2 className="text-sm text-primary my-2">
-          Press "Record Answer" when you will answer the question. You will get
-          the feedback along with the correct answer of each question and your
-          answer for comparing.
-        </h2>
+        <Volume2
+          className="cursor-pointer"
+          onClick={() =>
+            textToSpeech(mockInterviewQuestion[activeQuestion]?.question)
+          }
+        />
       </div>
     </div>
   );

@@ -51,11 +51,11 @@ export default function Home() {
       </div>
 
       <Image
-        src={"/banner.png"}
-        width={900}
-        height={600}
+        src={"/banner.jpg"}
+        width={1000}
+        height={1000}
         alt="hero banner"
-        className="mx-auto my-10 md:my-20 rounded-lg shadow-xl w-[350px] h-[220px] md:w-[900px] md:h-[600px]"
+        className="mx-auto my-10 md:my-20 rounded-lg shadow-xl w-[350px] h-[220px] md:w-[1000px] md:h-[600px]"
       />
 
       <div className="flex gap-2 md:gap-10 max-w-lg md:max-w-3xl mx-auto justify-around md:justify-evenly text-center">

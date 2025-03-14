@@ -82,8 +82,8 @@ function RecordAnswerSection({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="flex flex-col justify-center items-center rounded-lg p-5 mt-20">
+    <div className="flex flex-col items-center justify-center w-full p-5">
+      <div className="flex flex-col justify-center items-center rounded-lg">
         <WebcamIcon
           width={200}
           height={200}
@@ -92,7 +92,8 @@ function RecordAnswerSection({
         />
         <Webcam
           mirrored={true}
-          style={{ height: 370, width: "100%", Index: 10 }}
+          style={{ height: 400, width: "100%", Index: 10 }}
+          className="w-full h-fit md:h-[400px]"
         />
       </div>
 
@@ -100,7 +101,7 @@ function RecordAnswerSection({
         <Button
           disabled={loading}
           variant="outline"
-          className="my-10"
+          className="my-8"
           onClick={startStopRecording}
         >
           {isRecording ? (
@@ -114,6 +115,15 @@ function RecordAnswerSection({
           )}
         </Button>
       )}
+
+      <div className="border rounded-lg p-5 w-full flex flex-col gap-3">
+        <p className="font-semibold text-2xl">Your Answer: </p>
+        <p>
+          {userAnswer.length > 0
+            ? userAnswer
+            : "Start recording to see your answer here..."}
+        </p>
+      </div>
     </div>
   );
 }

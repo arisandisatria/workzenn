@@ -51,14 +51,14 @@ function Feedback({ params }) {
           <LoaderCircle className="animate-spin" size={48} />
         </div>
       ) : feedbacklist?.length < 1 ? (
-        <>
-          <h2 className="text-3xl font-bold mb-5">
+        <div className="flex flex-col text-center justify-center items-center h-[70vh]">
+          <h2 className="text-xl md:text-3xl font-bold mb-5">
             No interview feedback found! Please start interview simulator
           </h2>
           <Link href={"/dashboard"}>
-            <Button>Go Home</Button>
+            <Button>Back to Home</Button>
           </Link>
-        </>
+        </div>
       ) : (
         <>
           <h2 className="text-5xl font-bold text-green-500 mb-3">

@@ -87,7 +87,7 @@ function AddNewInterview() {
           </DialogHeader>
           <form onSubmit={onSubmit}>
             <div className="flex flex-col gap-1.5">
-              <label>Job role/position</label>
+              <label>Job Role/Position</label>
               <Input
                 placeholder="ex. Frontend Developer"
                 required
@@ -100,7 +100,7 @@ function AddNewInterview() {
               />
             </div>
             <div className="mt-2 flex flex-col gap-1.5">
-              <label>Job description</label>
+              <label>Job Description</label>
               <Textarea
                 className="resize-none"
                 placeholder="ex. Optimizing user interface"
