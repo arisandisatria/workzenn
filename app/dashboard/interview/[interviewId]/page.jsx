@@ -112,13 +112,13 @@ function Interview({ params }) {
         <div className="text-center">
           {webCamEnabled ? (
             <Webcam
-              style={{ height: 370, width: "100%" }}
+              style={{ height: 400, width: "100%" }}
               onUserMedia={() => setWebCamEnabled(true)}
               onUserMediaError={() => setWebCamEnabled(false)}
               mirrored={true}
             />
           ) : (
-            <WebcamIcon className="h-[370px] w-fit mx-auto p-20 rounded-lg bg-gray-200" />
+            <WebcamIcon className="h-[400px] w-fit mx-auto p-20 rounded-lg bg-gray-200" />
           )}
           <div className="flex flex-col justify-center items-center mt-5 gap-5">
             <div className="flex gap-2">

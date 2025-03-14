@@ -60,11 +60,19 @@ function StartInterview({ params }) {
               <Lightbulb />
               <strong>Note: </strong>
             </h2>
-            <h2 className="text-sm text-blue-500 my-2">
-              Press "Record Answer" when you will answer the question. You will
-              get the feedback along with the correct answer of each question
-              and your answer for comparing.
-            </h2>
+            <div className="text-sm text-blue-500 my-2">
+              <ul className="mb-2">
+                <li>
+                  1. Press "Record Answer" when you will answer the question.
+                </li>
+                <li>2. Press "Stop Record" to save answer.</li>
+              </ul>
+              <p>
+                {" "}
+                You will get the feedback along with the correct answer of each
+                question and your answer for comparing.
+              </p>
+            </div>
           </div>
           <div className="flex flex-col place-items-center border rounded-lg shadow-sm">
             <QuestionSection

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Mic, WebcamIcon } from "lucide-react";
+import { Camera, Mic, WebcamIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import useSpeechToText from "react-hook-speech-to-text";
@@ -17,7 +17,7 @@ function RecordAnswerSection({
   activeQuestion,
   interviewData,
 }) {
-  const [userAnswer, setUserAnswer] = useState("");
+  const [userAnswer, setUserAnswer] = useState();
   const {
     error,
     interimResult,
@@ -32,10 +32,15 @@ function RecordAnswerSection({
   });
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
+  const [webCamEnabled, setWebCamEnabled] = useState(false);
 
   useEffect(() => {
-    results.map((result) => {
-      setUserAnswer((prevAns) => prevAns + result?.transcript);
+    results.forEach((result) => {
+      setUserAnswer((prevAns) =>
+        prevAns.includes(result.transcript)
+          ? prevAns
+          : prevAns + " " + result.transcript
+      );
     });
   }, [results]);
 
@@ -84,37 +89,30 @@ function RecordAnswerSection({
   return (
     <div className="flex flex-col items-center justify-center w-full p-5">
       <div className="flex flex-col justify-center items-center rounded-lg">
-        <WebcamIcon
-          width={200}
-          height={200}
-          className="absolute"
-          color="black"
-        />
-        <Webcam
-          mirrored={true}
-          style={{ height: 400, width: "100%", Index: 10 }}
-          className="w-full h-fit md:h-[400px]"
-        />
+        {webCamEnabled ? (
+          <Webcam
+            style={{ height: 400, width: "100%" }}
+            onUserMedia={() => setWebCamEnabled(true)}
+            onUserMediaError={() => setWebCamEnabled(false)}
+            mirrored={true}
+          />
+        ) : (
+          <WebcamIcon className="h-[400px] w-fit mx-auto p-20 rounded-lg bg-gray-200" />
+        )}
       </div>
 
-      {mockInterviewQuestion?.length > 0 && (
-        <Button
-          disabled={loading}
-          variant="outline"
-          className="my-8"
-          onClick={startStopRecording}
-        >
-          {isRecording ? (
-            <h2 className="text-red-600 flex gap-2 items-center">
-              <Mic /> Stop Recording
-            </h2>
-          ) : (
-            <h2 className="text-primary flex gap-2 items-center">
-              <Mic /> Record Answer
-            </h2>
-          )}
-        </Button>
-      )}
+      <div className="my-10 flex gap-5">
+        <Camera
+          className={`cursor-pointer ${!webCamEnabled && "text-gray-400"}`}
+          onClick={() => setWebCamEnabled(!webCamEnabled)}
+        />
+        <Mic
+          onClick={() => startStopRecording()}
+          className={`cursor-pointer ${
+            !isRecording ? "text-gray-400" : "text-red-500"
+          }`}
+        />
+      </div>
 
       <div className="border rounded-lg p-5 w-full flex flex-col gap-3">
         <p className="font-semibold text-2xl">Your Answer: </p>

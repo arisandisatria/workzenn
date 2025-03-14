@@ -1,4 +1,5 @@
-import { Lightbulb, Volume2 } from "lucide-react";
+import { Volume2 } from "lucide-react";
+import { toast } from "sonner";
 import React from "react";
 
 function QuestionSection({
@@ -12,7 +13,7 @@ function QuestionSection({
       const speech = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(speech);
     } else {
-      alert("Your browser does not support text to speech!");
+      toast.error("Your browser does not support text to speech!");
     }
   };
 
