@@ -37,14 +37,14 @@ function aboutUs() {
     //   </div>
     //
     // </div>
-    <section class="">
-      <div class="py-12 ">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="lg:text-center">
-            <p class="font-heading mt-2 text-3xl leading-8 font-semibold tracking-tight text-primary sm:text-4xl">
+    <section className="">
+      <div className="py-12 ">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center">
+            <p className="font-heading mt-2 text-3xl leading-8 font-semibold tracking-tight text-primary sm:text-4xl">
               Empowering Job Seekers with AI
             </p>
-            <p class="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto">
+            <p className="mt-4 max-w-2xl text-lg text-gray-600 lg:mx-auto">
               At Workzenn, we believe that job searching should be smarter,
               faster, and stress-free. Our AI-powered platform is designed to
               help job seekers prepare for interviews, craft standout resumes,
@@ -52,15 +52,15 @@ function aboutUs() {
             </p>
           </div>
 
-          <div class="mt-10">
-            <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-              <div class="relative">
+          <div className="mt-10">
+            <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+              <div className="relative">
                 <dt>
-                  <p class="font-heading ml-16 text-lg leading-6 font-bold text-primary">
+                  <p className="font-heading ml-16 text-lg leading-6 font-bold text-primary">
                     Our Mission
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-600">
                   {" "}
                   We aim to bridge the gap between job seekers and opportunities
                   by providing intelligent tools that enhance job applications
@@ -69,13 +69,13 @@ function aboutUs() {
                   your dream job with confidence.
                 </dd>
               </div>
-              <div class="relative">
+              <div className="relative">
                 <dt>
-                  <p class="font-heading ml-16 text-lg leading-6 font-bold text-primary">
+                  <p className="font-heading ml-16 text-lg leading-6 font-bold text-primary">
                     Why Workzenn?
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd className="mt-2 ml-16 text-base text-gray-600">
                   <ul className="mt-2">
                     {" "}
                     <li>
@@ -103,7 +103,7 @@ function aboutUs() {
                     Our Vision
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
+                <dd class="mt-2 ml-16 text-base text-gray-600">
                   We envision a world where everyone has equal access to career
                   success. Workzenn empowers individuals with cutting-edge AI
                   solutions, ensuring they can confidently showcase their skills
@@ -121,7 +121,7 @@ function aboutUs() {
                 </h1>
               </Link>
 
-              <p className="mx-auto mt-6 max-w-xl text-center leading-relaxed text-gray-500">
+              <p className="mx-auto mt-6 max-w-xl text-center leading-relaxed text-gray-600">
                 Boost your job search with Workzenn. AI-driven resume builder,
                 interview prep, and career insights to land your dream job.
               </p>
@@ -139,12 +139,12 @@ function aboutUs() {
                   href="https:www.instagram.com/arisandi_satria/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-pink-500"
+                  className="hover:text-pink-600"
                 >
                   Instagram
                 </a>
               </div>
-              <p className="mt-12 text-gray-500">
+              <p className="mt-12 text-gray-600">
                 © {new Date().getFullYear()} Workzenn. All rights reserved.
               </p>
             </div>

@@ -4,7 +4,13 @@ import { Button } from "@/components/ui/button";
 import { db } from "@/utils/db";
 import { mockInterviewSchema } from "@/utils/schema";
 import { eq } from "drizzle-orm";
-import { AudioLines, Lightbulb, Mic, WebcamIcon } from "lucide-react";
+import {
+  AudioLines,
+  Lightbulb,
+  LoaderCircle,
+  Mic,
+  WebcamIcon,
+} from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, use, useState } from "react";
 import Webcam from "react-webcam";
@@ -88,9 +94,21 @@ function Interview({ params }) {
       <div className="flex flex-col">
         <div className="flex flex-col-reverse my-5 gap-5">
           <div className="flex flex-col p-5 rounded-lg border gap-5">
-            <h2 className="font-bold text-2xl">{interviewData?.jobPosition}</h2>
-            <p>{interviewData?.jobDesc}</p>
-            <p className="text-sm text-gray-400">{interviewData?.createdAt}</p>
+            {!interviewData ? (
+              <div className="flex justify-center items-center w-full col-span-4">
+                <LoaderCircle className="animate-spin" size={48} />
+              </div>
+            ) : (
+              <>
+                <h2 className="font-bold text-2xl">
+                  {interviewData?.jobPosition}
+                </h2>
+                <p>{interviewData?.jobDesc}</p>
+                <p className="text-sm text-gray-400">
+                  {interviewData?.createdAt}
+                </p>
+              </>
+            )}
           </div>
           <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">
             <h2 className="flex gap-2 items-center text-yellow-600">

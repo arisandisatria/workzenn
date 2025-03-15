@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Camera, Mic, WebcamIcon } from "lucide-react";
+import { Camera, Check, Loader, Mic, Save, WebcamIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import useSpeechToText from "react-hook-speech-to-text";
@@ -17,7 +16,7 @@ function RecordAnswerSection({
   activeQuestion,
   interviewData,
 }) {
-  const [userAnswer, setUserAnswer] = useState();
+  const [userAnswer, setUserAnswer] = useState({});
   const {
     error,
     interimResult,
@@ -32,23 +31,42 @@ function RecordAnswerSection({
   });
   const { user } = useUser();
   const [loading, setLoading] = useState(false);
-  const [webCamEnabled, setWebCamEnabled] = useState(false);
+  const [webCamEnabled, setWebCamEnabled] = useState(true);
 
   useEffect(() => {
-    results.forEach((result) => {
-      setUserAnswer((prevAns) =>
-        prevAns.includes(result.transcript)
-          ? prevAns
-          : prevAns + " " + result.transcript
-      );
-    });
+    setUserAnswer((prevAns) => ({
+      ...prevAns,
+      [activeQuestion]: prevAns[activeQuestion] || "",
+    }));
+  }, [activeQuestion]);
+
+  useEffect(() => {
+    if (results.length === 0) return;
+
+    setUserAnswer((prevAns) => ({
+      ...prevAns,
+      [activeQuestion]: results.reduce((acc, result) => {
+        return acc.includes(result.transcript)
+          ? acc
+          : acc + " " + result.transcript;
+      }, prevAns[activeQuestion] || ""),
+    }));
   }, [results]);
 
   useEffect(() => {
-    if (!isRecording && userAnswer?.length > 10) {
+    if (!isRecording && userAnswer[activeQuestion]?.length > 10) {
       updateUserAnswer();
     }
-  }, [userAnswer]);
+  }, [isRecording, userAnswer]);
+
+  useEffect(() => {
+    try {
+      setWebCamEnabled(true);
+    } catch (error) {
+      console.error("Webcam access denied:", error);
+      setWebCamEnabled(false);
+    }
+  }, []);
 
   const startStopRecording = async () => {
     if (isRecording) {
@@ -58,18 +76,22 @@ function RecordAnswerSection({
     }
   };
 
+  console.log(isRecording);
+
   const updateUserAnswer = async () => {
     setLoading(true);
     const aiFeedbackPrompt = `Question: ${mockInterviewQuestion[activeQuestion]?.question}, User Answer: ${userAnswer}. Depends on question and user answer for give interview question. Please give the rating 0 - 5 for answer and feedback as area of improvement if any. In just 4 to 6 lines to improve it in JSON format with rating field and feedback field.`;
 
     const result = await chatSession.sendMessage(aiFeedbackPrompt);
-    const response = JSON.parse(result.response.text());
+    const response = await JSON.parse(result.response.text());
+
+    console.log(response);
 
     const insertUserAnswerToDb = await db.insert(userAnswerSchema).values({
       mockIdRef: interviewData?.mockId,
       question: mockInterviewQuestion[activeQuestion]?.question,
       correctAnswer: mockInterviewQuestion[activeQuestion]?.answer,
-      userAnswer: userAnswer,
+      userAnswer: userAnswer[activeQuestion],
       feedback: response?.feedback,
       rating: response?.rating,
       userEmail: user?.primaryEmailAddress?.emailAddress,
@@ -77,12 +99,12 @@ function RecordAnswerSection({
     });
 
     if (insertUserAnswerToDb) {
-      toast("User answer recorded successfully");
+      toast.success("User answer recorded successfully!");
       setResults([]);
-      setUserAnswer("");
+      setUserAnswer({});
     }
     setResults([]);
-    setUserAnswer("");
+    setUserAnswer({});
     setLoading(false);
   };
 
@@ -112,15 +134,19 @@ function RecordAnswerSection({
             !isRecording ? "text-gray-400" : "text-red-500"
           }`}
         />
+        {loading && <Loader className="animate-spin" />}
       </div>
 
       <div className="border rounded-lg p-5 w-full flex flex-col gap-3">
         <p className="font-semibold text-2xl">Your Answer: </p>
         <p>
-          {userAnswer.length > 0
-            ? userAnswer
+          Current Answer:{" "}
+          {userAnswer[activeQuestion]?.length > 0
+            ? userAnswer[activeQuestion]
             : "Start recording to see your answer here..."}
         </p>
+
+        {interimResult && <p>{interimResult}</p>}
       </div>
     </div>
   );

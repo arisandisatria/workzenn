@@ -62,10 +62,9 @@ function StartInterview({ params }) {
             </h2>
             <div className="text-sm text-blue-500 my-2">
               <ul className="mb-2">
-                <li>
-                  1. Press "Record Answer" when you will answer the question.
-                </li>
-                <li>2. Press "Stop Record" to save answer.</li>
+                <li>1. Press the camera icon to enable web cam</li>
+                <li>2. Press the microphone icon to start record answer</li>
+                <li>3. Press the microphone icon once again to save answer</li>
               </ul>
               <p>
                 {" "}
