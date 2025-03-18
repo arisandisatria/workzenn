@@ -41,7 +41,7 @@ function Header({ toggleSideNav }) {
             path == "/dashboard/about-us" && "text-primary font-bold"
           }`}
         >
-          <Link href={"/dashboard/about-us"}>About Us</Link>
+          <Link href={"/dashboard/about-us"}>About Workzenn</Link>
         </li>
       </ul>
       <UserButton />

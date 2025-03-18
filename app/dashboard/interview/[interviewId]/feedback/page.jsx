@@ -12,12 +12,14 @@ import {
 import { ChevronsUpDownIcon, Info, LoaderCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Feedback({ params }) {
   const { interviewId } = use(params);
   const [feedbacklist, setFeedbackList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [interviewData, setInterviewData] = useState();
+  const router = useRouter();
 
   useEffect(() => {
     getFeedback();
@@ -55,6 +57,16 @@ function Feedback({ params }) {
     return +(totalRating / feedbacklist.length).toFixed(1);
   };
 
+  const resetFeedback = async () => {
+    setLoading(true);
+    await db
+      .delete(userAnswerSchema)
+      .where(eq(userAnswerSchema.mockIdRef, interviewId));
+
+    setLoading(false);
+    router.replace("/dashboard");
+  };
+
   return (
     <div className="py-10">
       {loading ? (
@@ -77,7 +89,7 @@ function Feedback({ params }) {
             Find below interview question with correct answer, your answer, and
             feedback for improvement
           </p>
-          <p className="text-primary text-lg my-6 flex items-end gap-2">
+          <p className="text-primary font-semibold text-lg my-6 flex items-end gap-2">
             Your overall interview rating:
             <strong className="text-xl flex items-center gap-1">
               <Star className="text-yellow-300" />
@@ -147,9 +159,18 @@ function Feedback({ params }) {
             </Collapsible>
           ))}
 
-          <Link href={"/dashboard"}>
-            <Button>Back to Home</Button>
-          </Link>
+          <div className="flex items-center justify-between">
+            <Link href={"/dashboard"}>
+              <Button disabled={loading}>Back to Home</Button>
+            </Link>
+            <Button
+              disabled={loading}
+              variant="destructive"
+              onClick={() => resetFeedback()}
+            >
+              Reset Interview Feedback
+            </Button>
+          </div>
         </>
       )}
     </div>

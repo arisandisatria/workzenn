@@ -27,6 +27,14 @@ const coverLetterGenerationConfig = {
   responseMimeType: "text/plain",
 };
 
+const resumeGenerationConfig = {
+  temperature: 1,
+  topP: 0.95,
+  topK: 40,
+  maxOutputTokens: 8192,
+  responseMimeType: "text/plain",
+};
+
 export const chatSession = model.startChat({
   generationConfig,
   history: [],
@@ -34,5 +42,10 @@ export const chatSession = model.startChat({
 
 export const coverLetterChatSession = model.startChat({
   coverLetterGenerationConfig,
+  history: [],
+});
+
+export const resumeChatSession = model.startChat({
+  resumeGenerationConfig,
   history: [],
 });

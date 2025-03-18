@@ -128,3 +128,9 @@
     border-radius: 0h;
   }
 }
+
+.prose {
+  word-break: normal;
+  word-wrap: break-word;
+  white-space: normal;
+}

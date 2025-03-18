@@ -11,7 +11,7 @@ function CoverLetterItemCard({ coverLetter }) {
 
   return (
     <div className="shadow-sm bg-white rounded-lg p-3 flex flex-col gap-1.5">
-      <h2 className="font-bold text-primary">
+      <h2 className="font-bold text-primary text-sm md:text-base">
         {coverLetter?.coverLetterTitle}
       </h2>
       <p className="text-xs text-gray-400">

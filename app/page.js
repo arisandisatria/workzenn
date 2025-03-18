@@ -37,13 +37,13 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="mx-auto text-center mt-10 md:mt-24 flex items-center flex-col gap-5">
-        <h1 className="uppercase text-5xl md:text-6xl lg:text-7xl xl:text-8xl bg-gradient-to-b from-primary via-gray-500 to-gray-600 font-extrabold text-transparent bg-clip-text tracking-tighter">
+      <div className="mx-auto text-center mt-10 md:mt-24 flex items-center flex-col gap-10">
+        <h1 className="uppercase text-5xl text-primary md:text-6xl lg:text-7xl xl:text-8xl font-extrabold  tracking-tighter">
           RELAX. You'll Get Hired Faster with Less effort
         </h1>
-        <p className="text-xs md:text-base text-gray-600">
-          Boost your job search with Workzenn. AI-driven resume builder,
-          interview prep, and career insights to land your dream job.{" "}
+        <p className="text-xs md:text-lg text-gray-600">
+          Practice your interview, make cover letter, and even your resume in
+          one platform.
         </p>
         <Link href={"/sign-up"}>
           <Button>Get Started</Button>
@@ -64,15 +64,13 @@ export default function Home() {
           <h3 className="font-bold text-base md:text-lg">
             Interview Simulation
           </h3>
-          <p className="hidden md:block text-xs">
-            Train your interview with AI
-          </p>
+          <p className="hidden md:block text-xs">Train your interview</p>
         </div>
         <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-3 md:p-5 rounded-lg w-[50%] md:w-[60%] flex flex-col gap-2">
           <Scroll className="mx-auto" />
           <h3 className="font-bold text-base md:text-lg">Cover Letter Maker</h3>
           <p className="hidden md:block text-xs">
-            Make a very attractive cover letter with AI help
+            Make a very attractive cover letter
           </p>
         </div>
         <div className="shadow-lg bg-primary hover:bg-secondary hover:outline outline-primary outline-1 hover:text-primary transition-all text-white p-3 md:p-5 rounded-lg w-[50%] md:w-[60%] flex flex-col gap-2">
@@ -254,7 +252,7 @@ export default function Home() {
 
       <div className="mx-auto my-10 flex flex-col gap-10 py-10 md:py-20 items-center border border-r-0 border-l-0 border-primary">
         <h2 className="text-center text-4xl font-bold text-primary">
-          You think too much. Join us now!
+          Click below and get your job ASAP!
         </h2>
         <Link href={"/sign-up"}>
           <Button className="animate-bounce w-fit">Get Started</Button>

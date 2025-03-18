@@ -76,7 +76,7 @@ function AddNewInterview() {
       <Button onClick={() => setOpenDialog(true)}>+ New</Button>
 
       <Dialog open={openDialog}>
-        <DialogContent className="max-w-xl">
+        <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle className="font-bold text-2xl">
               Tell us more
@@ -89,7 +89,7 @@ function AddNewInterview() {
             <div className="flex flex-col gap-1.5">
               <label>Job Role/Position</label>
               <Input
-                placeholder="ex. Frontend Developer"
+                placeholder="Frontend Developer"
                 required
                 onChange={(event) =>
                   setJob({
@@ -103,7 +103,7 @@ function AddNewInterview() {
               <label>Job Description</label>
               <Textarea
                 className="resize-none"
-                placeholder="ex. Optimizing user interface"
+                placeholder="Optimizing user interface"
                 required
                 onChange={(event) =>
                   setJob({
@@ -116,7 +116,7 @@ function AddNewInterview() {
             <div className="mt-2 flex flex-col gap-1.5">
               <label>Years of Experience</label>
               <Input
-                placeholder="ex. 2"
+                placeholder="2"
                 type="number"
                 min="0"
                 max="99"
@@ -141,10 +141,10 @@ function AddNewInterview() {
                 {loading ? (
                   <>
                     <LoaderCircle className="animate-spin" />
-                    Generating...
+                    Creating...
                   </>
                 ) : (
-                  "Add Interview"
+                  "Create Interview"
                 )}
               </Button>
             </div>

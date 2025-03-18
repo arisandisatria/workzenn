@@ -10,7 +10,7 @@ function Dashboard() {
 
       <InterviewList />
       <CoverLetterList />
-      {/* <ResumeList /> */}
+      <ResumeList />
     </div>
   );
 }

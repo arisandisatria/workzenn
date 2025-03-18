@@ -1,26 +1,39 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import React from "react";
-// import {
-//   getAuthenticatedUser,
-//   lemonSqueezySetup,
-// } from "@lemonsqueezy/lemonsqueezy.js";
-
-// const apiKey = import.meta.env.NEXT_PUBLIC_LEMON_SQUEEZY_API_KEY;
-
-// lemonSqueezySetup({
-//   apiKey,
-//   onError: (error) => console.error("Error!", error),
-// });
-
-// const { data, error } = await getAuthenticatedUser();
-
-// if (error) {
-//   console.log(error.message);
-// } else {
-//   console.log(data);
-// }
+import { useUser } from "@clerk/nextjs";
+import React, { useState } from "react";
 
 function Upgrade() {
+  const [loading, setLoading] = useState(false);
+  const { user } = useUser();
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_LEMON_SQUEEZY_API_KEY}`,
+          "Content-Type": "application/vnd.api+json",
+          Accept: "application/vnd.api+json",
+        },
+        body: JSON.stringify({
+          product_id: process.env.NEXT_PUBLIC_LEMON_SQUEEZY_VARIANT_ID,
+          user_email: user?.primaryEmailAddress?.emailAddress,
+        }),
+      });
+
+      const data = await response.json();
+
+      window.open(data.checkoutUrl, "_blank");
+    } catch (error) {
+      console.log("Checkout error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="mx-auto max-w-3xl my-6 md:my-20 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
@@ -34,7 +47,7 @@ function Upgrade() {
             <p className="mt-2 sm:mt-4">
               <strong className="text-3xl font-bold text-gray-900 sm:text-4xl">
                 {" "}
-                10${" "}
+                9.99${" "}
               </strong>
 
               <span className="text-sm font-medium text-gray-700">/month</span>
@@ -140,7 +153,11 @@ function Upgrade() {
             </li>
           </ul>
 
-          <Button className="mt-8 w-full block rounded-full border border-primary bg-primary px-12 text-center text-sm font-medium text-white hover:bg-primary hover:ring-1 hover:ring-primary focus:ring-3 focus:outline-hidden">
+          <Button
+            onClick={() => handleCheckout()}
+            disabled={loading}
+            className="mt-8 w-full block rounded-full border border-primary bg-primary px-12 text-center text-sm font-medium text-white hover:bg-primary hover:ring-1 hover:ring-primary focus:ring-3 focus:outline-hidden"
+          >
             Get Started
           </Button>
         </div>

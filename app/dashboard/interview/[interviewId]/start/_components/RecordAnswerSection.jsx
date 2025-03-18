@@ -14,6 +14,7 @@ import moment from "moment";
 function RecordAnswerSection({
   mockInterviewQuestion,
   activeQuestion,
+  setActiveQuestion,
   interviewData,
 }) {
   const [userAnswer, setUserAnswer] = useState({});
@@ -76,16 +77,12 @@ function RecordAnswerSection({
     }
   };
 
-  console.log(isRecording);
-
   const updateUserAnswer = async () => {
     setLoading(true);
     const aiFeedbackPrompt = `Question: ${mockInterviewQuestion[activeQuestion]?.question}, User Answer: ${userAnswer}. Depends on question and user answer for give interview question. Please give the rating 0 - 5 for answer and feedback as area of improvement if any. In just 4 to 6 lines to improve it in JSON format with rating field and feedback field.`;
 
     const result = await chatSession.sendMessage(aiFeedbackPrompt);
     const response = await JSON.parse(result.response.text());
-
-    console.log(response);
 
     const insertUserAnswerToDb = await db.insert(userAnswerSchema).values({
       mockIdRef: interviewData?.mockId,
@@ -102,6 +99,7 @@ function RecordAnswerSection({
       toast.success("User answer recorded successfully!");
       setResults([]);
       setUserAnswer({});
+      setActiveQuestion(activeQuestion + 1);
     }
     setResults([]);
     setUserAnswer({});
@@ -113,13 +111,13 @@ function RecordAnswerSection({
       <div className="flex flex-col justify-center items-center rounded-lg">
         {webCamEnabled ? (
           <Webcam
-            style={{ height: 400, width: "100%" }}
+            style={{ height: "auto", width: "100%" }}
             onUserMedia={() => setWebCamEnabled(true)}
             onUserMediaError={() => setWebCamEnabled(false)}
             mirrored={true}
           />
         ) : (
-          <WebcamIcon className="h-[400px] w-fit mx-auto p-20 rounded-lg bg-gray-200" />
+          <WebcamIcon className="mx-auto p-20 rounded-lg bg-gray-200" />
         )}
       </div>
 

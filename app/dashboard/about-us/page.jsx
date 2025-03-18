@@ -3,40 +3,6 @@ import React from "react";
 
 function aboutUs() {
   return (
-    // <div className="py-5">
-    //   <h2 className="font-bold text-2xl mb-4">About Workzenn</h2>
-    //   <div className="mb-3">
-    //     <h3 className="font-semibold text-xl">
-    //
-    //     </h3>
-    //     <p className="mt-2 text-justify">
-    //
-    //     </p>
-    //   </div>
-    //   <div className="mb-3">
-    //     <h3 className="font-semibold text-xl"></h3>
-    //     <p className="mt-2 text-justify">
-    //
-    //     </p>
-    //   </div>
-    //   <div className="mb-3">
-    //     <h3 className="font-semibold text-xl"></h3>
-    //
-    //   </div>
-    //   <div className="mb-3">
-    //     <h3 className="font-semibold text-xl"></h3>
-    //     <p className="mt-2 text-justify">
-    //
-    //     </p>
-    //   </div>
-    //   <div className="mb-3">
-    //     <h3 className="font-semibold text-xl"></h3>
-    //     <p className="mt-2 text-justify">
-    //
-    //     </p>
-    //   </div>
-    //
-    // </div>
     <section className="">
       <div className="py-12 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,11 +22,11 @@ function aboutUs() {
             <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
               <div className="relative">
                 <dt>
-                  <p className="font-heading ml-16 text-lg leading-6 font-bold text-primary">
+                  <p className="font-heading md:ml-16 text-lg leading-6 font-bold text-primary">
                     Our Mission
                   </p>
                 </dt>
-                <dd className="mt-2 ml-16 text-base text-gray-600">
+                <dd className="mt-2 md:ml-16 text-base text-gray-600">
                   {" "}
                   We aim to bridge the gap between job seekers and opportunities
                   by providing intelligent tools that enhance job applications
@@ -71,11 +37,11 @@ function aboutUs() {
               </div>
               <div className="relative">
                 <dt>
-                  <p className="font-heading ml-16 text-lg leading-6 font-bold text-primary">
+                  <p className="font-heading md:ml-16 text-lg leading-6 font-bold text-primary">
                     Why Workzenn?
                   </p>
                 </dt>
-                <dd className="mt-2 ml-16 text-base text-gray-600">
+                <dd className="mt-2 md:ml-16 text-base text-gray-600">
                   <ul className="mt-2">
                     {" "}
                     <li>
@@ -89,21 +55,17 @@ function aboutUs() {
                     <li>
                       ✅ Smart Cover Letter Generator – Stand out with
                       AI-assisted cover letters (coming soon).{" "}
-                    </li>{" "}
-                    <li>
-                      ✅ Career Growth Support – Gain insights and improve your
-                      job-seeking strategy.{" "}
-                    </li>{" "}
+                    </li>
                   </ul>
                 </dd>
               </div>
-              <div class="relative">
+              <div className="relative">
                 <dt>
-                  <p class="font-heading ml-16 text-lg leading-6 font-bold text-primary">
+                  <p className="font-heading md:ml-16 text-lg leading-6 font-bold text-primary">
                     Our Vision
                   </p>
                 </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-600">
+                <dd className="mt-2 md:ml-16 text-base text-gray-600">
                   We envision a world where everyone has equal access to career
                   success. Workzenn empowers individuals with cutting-edge AI
                   solutions, ensuring they can confidently showcase their skills
@@ -115,34 +77,22 @@ function aboutUs() {
 
           <footer className="text-center">
             <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-              <Link href={"/"}>
-                <h1 className="font-extrabold text-center text-4xl text-primary">
-                  <strong>Workzenn</strong>
-                </h1>
-              </Link>
-
-              <p className="mx-auto mt-6 max-w-xl text-center leading-relaxed text-gray-600">
-                Boost your job search with Workzenn. AI-driven resume builder,
-                interview prep, and career insights to land your dream job.
-              </p>
-
-              <div className="mt-12 flex justify-center gap-6 md:gap-8">
-                <a
-                  href="https:www.linkedin.com/in/arisandisatriajeujanan/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-700"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https:www.instagram.com/arisandi_satria/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-pink-600"
-                >
-                  Instagram
-                </a>
+              <div className="mt-12 flex justify-center gap-1 text-gray-600">
+                <p>
+                  Hi, I'm Aris the creator of{" "}
+                  <Link href={"/"} className="text-primary hover:underline">
+                    Workzenn
+                  </Link>
+                  . You can find me on my{" "}
+                  <a
+                    href="https:www.instagram.com/arisandi_satria/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-600 hover:underline"
+                  >
+                    Instagram.
+                  </a>
+                </p>
               </div>
               <p className="mt-12 text-gray-600">
                 © {new Date().getFullYear()} Workzenn. All rights reserved.

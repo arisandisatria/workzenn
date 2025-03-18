@@ -84,7 +84,7 @@ function AddNewCoverLetter() {
       <Button onClick={() => setOpenDialog(true)}>+ New</Button>
 
       <Dialog open={openDialog}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle className="font-bold text-2xl">
               Fill Your Details
@@ -96,7 +96,7 @@ function AddNewCoverLetter() {
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm md:text-base">Your Name*</label>
                 <Input
-                  placeholder="ex. John Doe"
+                  placeholder="John Doe"
                   required
                   onChange={(event) =>
                     setInfo({
@@ -109,7 +109,7 @@ function AddNewCoverLetter() {
               <div className="flex flex-col gap-1.5">
                 <label className="text-sm md:text-base">Phone Number</label>
                 <Input
-                  placeholder="ex. 0812345678"
+                  placeholder="0812345678"
                   type="tel"
                   onChange={(event) =>
                     setInfo({
@@ -123,7 +123,7 @@ function AddNewCoverLetter() {
                 <label className="text-sm md:text-base">Email</label>
                 <Input
                   type="email"
-                  placeholder="ex. example@gmail.com"
+                  placeholder="example@gmail.com"
                   onChange={(event) =>
                     setInfo({
                       ...info,
@@ -136,7 +136,7 @@ function AddNewCoverLetter() {
             <div className="flex flex-col gap-1.5">
               <label className="text-sm md:text-base">Your Address</label>
               <Input
-                placeholder="ex. Sesame Street"
+                placeholder="Sesame Street"
                 onChange={(event) =>
                   setInfo({
                     ...info,
@@ -148,7 +148,7 @@ function AddNewCoverLetter() {
             <div className="mt-2 flex flex-col gap-1.5">
               <label className="text-sm md:text-base">Job Position*</label>
               <Input
-                placeholder="ex. Frontend Developer"
+                placeholder="Frontend Developer"
                 required
                 onChange={(event) =>
                   setInfo({
@@ -162,7 +162,7 @@ function AddNewCoverLetter() {
               <div className="mt-2 flex flex-col gap-1.5">
                 <label className="text-sm md:text-base">Receiver Name*</label>
                 <Input
-                  placeholder="ex. Mr. Andrew Smith"
+                  placeholder="Mr. Andrew Smith"
                   required
                   onChange={(event) =>
                     setInfo({
@@ -177,7 +177,7 @@ function AddNewCoverLetter() {
                   Receiver Position*
                 </label>
                 <Input
-                  placeholder="ex. Recruitment Team"
+                  placeholder="Recruitment Team"
                   required
                   onChange={(event) =>
                     setInfo({
@@ -190,7 +190,7 @@ function AddNewCoverLetter() {
               <div className="mt-2 flex flex-col gap-1.5">
                 <label className="text-sm md:text-base">Company Name*</label>
                 <Input
-                  placeholder="ex. Meta, Google, Alibaba"
+                  placeholder="Meta, Google, Alibaba"
                   required
                   onChange={(event) =>
                     setInfo({
@@ -203,7 +203,7 @@ function AddNewCoverLetter() {
               <div className="mt-2 flex flex-col gap-1.5">
                 <label className="text-sm md:text-base">Job Info Source*</label>
                 <Input
-                  placeholder="ex. Linkedin"
+                  placeholder="Linkedin"
                   required
                   onChange={(event) =>
                     setInfo({
@@ -218,7 +218,7 @@ function AddNewCoverLetter() {
             <div className="mt-2 flex flex-col gap-1.5">
               <label className="text-sm md:text-base">Company Address*</label>
               <Input
-                placeholder="ex. Wall Street"
+                placeholder="Wall Street"
                 required
                 onChange={(event) =>
                   setInfo({
@@ -233,7 +233,7 @@ function AddNewCoverLetter() {
               <label className="text-sm md:text-base">Your Experience*</label>
               <Textarea
                 className="resize-none"
-                placeholder="ex. I have been a frontend developer for about 3 years. I've manage to develop a website and increasing the team work effeciency for about 20% and I always love to work as a team."
+                placeholder="I have been a frontend developer for about 3 years. I've manage to develop a website and increasing the team work effeciency for about 20% and I always love to work as a team."
                 required
                 onChange={(event) =>
                   setInfo({

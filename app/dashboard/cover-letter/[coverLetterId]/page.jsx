@@ -30,7 +30,7 @@ function CoverLetter({ params }) {
   const router = useRouter();
 
   const formattedContent = coverLetterData
-    .replace(/ /g, "&nbsp;")
+    // .replace(/ /g, "&nbsp;")
     .replace(/\n/g, "<br>");
 
   const editor = useEditor({
@@ -40,7 +40,7 @@ function CoverLetter({ params }) {
     editorProps: {
       attributes: {
         class:
-          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none bg-white p-4 rounded-lg",
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none bg-white p-2 md:p-4 rounded-lg",
       },
     },
   });
@@ -122,12 +122,10 @@ function CoverLetter({ params }) {
       ) : (
         coverLetterData !== "" && (
           <>
-            <div className="flex justify-between items-center">
-              <h2 className="font-bold text-2xl mb-4">
-                {coverLetterTitle} Cover Letter
-              </h2>
-              <p className="text-gray-400">
-                Created At: {coverLetterCreatedAt}
+            <div className="flex justify-between items-end mb-4">
+              <h2 className="font-bold text-2xl">{coverLetterTitle}</h2>
+              <p className="text-gray-400 text-xs md:text-base">
+                Created at: {coverLetterCreatedAt}
               </p>
             </div>
             <EditorContent editor={editor} />
