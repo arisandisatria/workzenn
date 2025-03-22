@@ -47,13 +47,13 @@ function AddNewCoverLetter() {
     try {
       setLoading(true);
 
-      const generatedQuestion = await coverLetterChatSession.sendMessage(
+      const generatedCoverLetter = await coverLetterChatSession.sendMessage(
         COVER_LETTER_PROMPT(info)
       );
-      const result = generatedQuestion.response.text();
+      const result = generatedCoverLetter.response.text();
       setAiResp(result);
 
-      if (generatedQuestion) {
+      if (generatedCoverLetter) {
         const insertToDb = await db
           .insert(coverLetterSchema)
           .values({

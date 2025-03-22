@@ -261,23 +261,22 @@ export default function Home() {
 
       <footer className="text-center text-primary text-sm py-4">
         <p>© {new Date().getFullYear()} Workzenn. All rights reserved.</p>
-        <div className="flex justify-center space-x-4 mt-2">
-          <a
-            href="https://www.linkedin.com/in/arisandisatriajeujanan/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-700"
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://www.instagram.com/arisandi_satria/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-pink-500"
-          >
-            Instagram
-          </a>
+        <div className="mt-12 flex justify-center gap-1 text-primary">
+          <p>
+            Hi, I'm Aris the creator of{" "}
+            <Link href={"/"} className="text-primary hover:underline">
+              Workzenn
+            </Link>
+            . You can find me on my{" "}
+            <a
+              href="https:www.instagram.com/arisandi_satria/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-600 hover:underline"
+            >
+              Instagram.
+            </a>
+          </p>
         </div>
       </footer>
     </main>

@@ -11,6 +11,18 @@ export const mockInterviewSchema = pgTable("mockInterview", {
   mockId: varchar("mockId").notNull(),
 });
 
+export const userAnswerSchema = pgTable("userAnswer", {
+  id: serial("id").primaryKey(),
+  mockIdRef: varchar("mockId").notNull(),
+  question: varchar("question").notNull(),
+  correctAnswer: varchar("correctAnswer").notNull(),
+  userAnswer: text("userAnswer").notNull(),
+  feedback: text("feedback"),
+  rating: varchar("rating"),
+  userEmail: varchar("userEmail"),
+  createdAt: varchar("createdAt").notNull(),
+});
+
 export const coverLetterSchema = pgTable("coverLetter", {
   id: serial("id").primaryKey(),
   coverLetterId: varchar("coverLetterId").notNull(),
@@ -23,20 +35,8 @@ export const coverLetterSchema = pgTable("coverLetter", {
 export const resumeSchema = pgTable("resume", {
   id: serial("id").primaryKey(),
   resumeId: varchar("resumeId").notNull(),
-  resumeResp: text("resumeResp"),
+  resumeDetail: text("resumeDetail"),
   resumeTitle: varchar("resumeTitle").notNull(),
   createdBy: varchar("createdBy").notNull(),
-  createdAt: varchar("createdAt").notNull(),
-});
-
-export const userAnswerSchema = pgTable("userAnswer", {
-  id: serial("id").primaryKey(),
-  mockIdRef: varchar("mockId").notNull(),
-  question: varchar("question").notNull(),
-  correctAnswer: varchar("correctAnswer").notNull(),
-  userAnswer: text("userAnswer").notNull(),
-  feedback: text("feedback"),
-  rating: varchar("rating"),
-  userEmail: varchar("userEmail"),
   createdAt: varchar("createdAt").notNull(),
 });

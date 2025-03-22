@@ -22,16 +22,25 @@ function CoverLetterList() {
 
   const getCoverLetterList = async () => {
     setLoading(true);
-    const result = await db
-      .select()
-      .from(coverLetterSchema)
-      .where(
-        eq(coverLetterSchema.createdBy, user?.primaryEmailAddress?.emailAddress)
-      )
-      .orderBy(desc(coverLetterSchema.id));
 
-    setCoverLetterList(result);
-    setLoading(false);
+    try {
+      const result = await db
+        .select()
+        .from(coverLetterSchema)
+        .where(
+          eq(
+            coverLetterSchema.createdBy,
+            user?.primaryEmailAddress?.emailAddress
+          )
+        )
+        .orderBy(desc(coverLetterSchema.id));
+
+      setCoverLetterList(result);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="mb-3">

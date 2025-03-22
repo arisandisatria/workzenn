@@ -10,61 +10,45 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { chatSession } from "@/utils/aiModel";
 import { LoaderCircle } from "lucide-react";
 import { db } from "@/utils/db";
 import { v4 as uuidv4 } from "uuid";
-import { mockInterviewSchema } from "@/utils/schema";
+import { resumeSchema } from "@/utils/schema";
 import { useUser } from "@clerk/nextjs";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import { PROMPT } from "@/utils/constants";
 
 function AddNewResume() {
   const [loading, setLoading] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [jobTitle, setJobTitle] = useState("");
-  const [aiResp, setAiResp] = useState([]);
   const { user } = useUser();
   const router = useRouter();
 
   const onSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    // try {
-    //   setLoading(true);
+    try {
+      const insertToDb = await db
+        .insert(resumeSchema)
+        .values({
+          resumeId: uuidv4(),
+          resumeTitle: jobTitle,
+          createdBy: user?.primaryEmailAddress?.emailAddress,
+          createdAt: moment().format("DD-MM-YYYY"),
+        })
+        .returning({ resumeId: resumeSchema.resumeId });
 
-    //   const generatedQuestion = await resumeChatSession.sendMessage(
-    //     PROMPT(job.position, job.description, job.experience)
-    //   );
-    //   const result = generatedQuestion.response.text();
-    //   setAiResp(result);
-
-    //   if (generatedQuestion) {
-    //     const insertToDb = await db
-    //       .insert(mockInterviewSchema)
-    //       .values({
-    //         mockId: uuidv4(),
-    //         jsonMockResp: result,
-    //         jobPosition: job.position,
-    //         jobDesc: job.description,
-    //         jobExp: job.experience,
-    //         createdBy: user?.primaryEmailAddress?.emailAddress,
-    //         createdAt: moment().format("DD-MM-YYYY"),
-    //       })
-    //       .returning({ mockId: mockInterviewSchema.mockId });
-
-    //     if (insertToDb) {
-    //       setOpenDialog(false);
-    //       router.push(`/dashboard/interview/${insertToDb[0]?.mockId}`);
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error.message);
-    // } finally {
-    //   setLoading(false);
-    // }
+      if (insertToDb) {
+        setOpenDialog(false);
+        router.push(`/dashboard/resume-builder/${insertToDb[0]?.resumeId}`);
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
