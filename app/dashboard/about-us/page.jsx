@@ -80,18 +80,21 @@ function aboutUs() {
               <div className="mt-12 flex justify-center gap-1 text-gray-600">
                 <p>
                   Hi, I'm Aris the creator of{" "}
-                  <Link href={"/"} className="text-primary hover:underline">
+                  <Link
+                    href={"/"}
+                    className="text-primary hover:underline font-semibold"
+                  >
                     Workzenn
                   </Link>
                   . You can find me on my{" "}
-                  <a
+                  <Link
                     href="https:www.instagram.com/arisandi_satria/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-pink-600 hover:underline"
+                    className="text-pink-600 hover:underline font-semibold"
                   >
                     Instagram.
-                  </a>
+                  </Link>
                 </p>
               </div>
               <p className="mt-12 text-gray-600">

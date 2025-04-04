@@ -73,7 +73,7 @@ function StartInterview({ params }) {
               </p>
             </div>
           </div>
-          <div className="flex flex-col place-items-center border rounded-lg shadow-sm">
+          <div className="flex flex-col md:flex-row border rounded-lg shadow-sm">
             <QuestionSection
               mockInterviewQuestion={mockInterviewQuestion}
               activeQuestion={activeQuestion}

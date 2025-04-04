@@ -5,7 +5,7 @@ import ResumeList from "./_components/ResumeList";
 
 function Dashboard() {
   return (
-    <div className="py-5">
+    <div className="py-5 relative">
       <h2 className="font-bold text-2xl mb-4">Dashboard</h2>
 
       <InterviewList />

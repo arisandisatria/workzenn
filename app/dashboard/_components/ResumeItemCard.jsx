@@ -1,25 +1,21 @@
-import { Button } from "@/components/ui/button";
+import { Newspaper } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 function ResumeItemCard({ resume }) {
   const router = useRouter();
 
-  const onDetail = () => {
-    router.push(`/dashboard/resume/${resume?.mockId}`);
-  };
-
   return (
-    <div className="shadow-sm bg-white rounded-lg p-3 flex flex-col gap-1.5">
-      <h2 className="font-bold text-primary text-sm md:text-base">
-        {resume?.jobPosition}
+    <Link
+      href={`/dashboard/resume-builder/${resume?.resumeId}`}
+      className="shadow-sm bg-white rounded-lg p-8 md:p-14 flex flex-col justify-center items-center gap-1.5 hover:shadow-md cursor-pointer transition-all"
+    >
+      <Newspaper />
+      <h2 className="font-bold text-primary text-center text-sm md:text-base">
+        {resume?.resumeTitle}
       </h2>
-      <h2 className="text-xs text-gray-400">Created At: {resume?.createdAt}</h2>
-
-      <Button onClick={onDetail} className="w-full">
-        Details
-      </Button>
-    </div>
+    </Link>
   );
 }
 

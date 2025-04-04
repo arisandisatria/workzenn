@@ -31,11 +31,12 @@ export const COVER_LETTER_PROMPT = (info) => {
     [Company Address: ${info.companyAddress}]
 
     - Structure format:
+      [Current Date]
+
       [My Name]
       [My Address]
       [My Email]
       [My Phone Number]
-      [Current Date]
 
       [Hiring Manager’s Name]
       [Hiring Manager’s Position]

@@ -53,7 +53,9 @@ function AddNewResume() {
 
   return (
     <div>
-      <Button onClick={() => setOpenDialog(true)}>+ New</Button>
+      <Button disabled onClick={() => setOpenDialog(true)}>
+        + New
+      </Button>
 
       <Dialog open={openDialog}>
         <DialogContent className="max-w-sm">

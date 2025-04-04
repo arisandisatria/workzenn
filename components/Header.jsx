@@ -16,7 +16,7 @@ function Header({ toggleSideNav }) {
         size={35}
         className="sm:hidden cursor-pointer"
       />
-      <Link href={"/"}>
+      <Link href={"/dashboard"}>
         <h1 className="font-extrabold text-4xl text-primary">
           <strong>Workzenn</strong>
         </h1>

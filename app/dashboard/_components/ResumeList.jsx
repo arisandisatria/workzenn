@@ -1,11 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import { File, LoaderCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import AddNewResume from "./AddNewResume";
+import { resumeSchema } from "@/utils/schema";
+import { db } from "@/utils/db";
+import { desc, eq } from "drizzle-orm";
+import ResumeItemCard from "./ResumeItemCard";
 function ResumeList() {
   const { user, isLoaded } = useUser();
   const [loading, setLoading] = useState(false);
@@ -18,19 +21,22 @@ function ResumeList() {
 
   const getResumeList = async () => {
     setLoading(true);
-    //  const result = await db
-    //    .select()
-    //    .from(mockInterviewSchema)
-    //    .where(
-    //      eq(
-    //        mockInterviewSchema.createdBy,
-    //        user?.primaryEmailAddress?.emailAddress
-    //      )
-    //    )
-    //    .orderBy(desc(mockInterviewSchema.id));
 
-    //    setResumeList(result);
-    setLoading(false);
+    try {
+      const result = await db
+        .select()
+        .from(resumeSchema)
+        .where(
+          eq(resumeSchema.createdBy, user?.primaryEmailAddress?.emailAddress)
+        )
+        .orderBy(desc(resumeSchema.id));
+
+      setResumeList(result);
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
